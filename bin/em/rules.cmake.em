@@ -26,3 +26,7 @@ override_dh_auto_configure:
 override_dh_auto_test:
 	echo -- Running tests. Even if one of them fails the build is not canceled.
 	dh_auto_test || true
+
+
+override_dh_strip:
+        dh_strip --dbg-package=@(Package)-dbg
