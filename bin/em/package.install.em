@@ -1,1 +1,1 @@
-/opt/ros/fuerte
+@(INSTALL_PREFIX)

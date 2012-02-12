@@ -11,6 +11,7 @@ from pprint import pprint
 import tarfile
 import yaml
 import re
+import shutil
 
 name_key = 'Catkin-ProjectName'
 
@@ -222,8 +223,10 @@ def generate_deb(stack_yaml, repo_path, stamp, debian_distro, rosdep_db):
     expand('changelog', stack_yaml, source_dir, dest_dir, filetype=stack_yaml['Catkin-ChangelogType'])
     expand('rules', stack_yaml, source_dir, dest_dir, filetype=stack_yaml['Catkin-DebRulesType'])
     expand('copyright', stack_yaml, source_dir, dest_dir, filetype=stack_yaml['Catkin-CopyrightType'])
+    expand('package', stack_yaml, source_dir, dest_dir, filetype='install')
+
     try:
-        shutil.copyfile(os.path.join(source_dir, 'package.install.em'), os.path.join(dest_dir, '%s.install'%stack_yaml['Package']))
+        shutil.copyfile(os.path.join(source_dir, 'package'), os.path.join(dest_dir, '%s.install'%stack_yaml['Package']))
     except Exception, ex:
         print ("Failed to copy %s.rosintall into debian directory."%stack_yaml['Package'], ex)
 
