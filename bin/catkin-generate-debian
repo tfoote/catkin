@@ -226,7 +226,7 @@ def generate_deb(stack_yaml, repo_path, stamp, debian_distro, rosdep_db):
     expand('package', stack_yaml, source_dir, dest_dir, filetype='install')
 
     try:
-        shutil.copyfile(os.path.join(source_dir, 'package'), os.path.join(dest_dir, '%s.install'%stack_yaml['Package']))
+        shutil.move(os.path.join(source_dir, 'package'), os.path.join(dest_dir, '%s.install'%stack_yaml['Package']))
     except Exception, ex:
         print ("Failed to copy %s.rosintall into debian directory."%stack_yaml['Package'], ex)
 
